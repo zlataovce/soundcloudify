@@ -2,7 +2,7 @@
 A SoundCloud bulk music downloader
 
 ## Installation
- - You can use the prebuilt program (soundcloudify.exe) or you can compile from source.
+ - You can use the prebuilt program in releases or you can compile from source.
 
 ## Compiling from source
  - Install soundcloud-lib and pyinstaller with pip.

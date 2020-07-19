@@ -25,7 +25,7 @@ def get_music(url, api):
         except:
             print("Failed to get " + props + ".")
 
-print("SoundCloudify build 1.0dev2")
+print("SoundCloudify build 1.0dev3")
 print("---------------------------")
 if not os.path.exists("music"):
     os.mkdir("music")
@@ -36,7 +36,11 @@ if not os.path.exists("music.txt"):
 
 with open("music.txt") as file:
     for line in file:
-        get_music(line.rstrip('\n'), api)
+        linestrip = line.rstrip('\n')
+        if 'soundcloud.com' in linestrip:
+            get_music(linestrip, api)
+        else:
+            print("Skipping a line: Line doesn't contain a SoundCloud URL.")
 
 print("Iterated through the file! Music should be downloaded.")
 time.sleep(3)

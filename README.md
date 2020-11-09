@@ -5,7 +5,6 @@ A SoundCloud bulk music downloader
  - You can use the prebuilt program in releases or you can compile from source.
 
 ## Compiling from source 
-You now need to install Visual Studio C++ Build Tools to compile soundcloud-lib.
  - Install soundcloud-lib and pyinstaller with pip.
  - Run the following command in the source directory: pyinstaller --onefile --hidden-import sclib soundcloudify.py
  - Open the dist directory and use the soundcloudify.exe file!

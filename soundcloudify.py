@@ -4,7 +4,7 @@ from os import mkdir
 from sys import exit, argv
 import time
 
-apikey = SoundcloudAPI()
+api_key = SoundcloudAPI()
 
 
 def get_music(url, api, music_folder):
@@ -39,7 +39,7 @@ if __name__ == '__main__':
         path_musicfolder = argv[2]
     except IndexError:
         path_musicfolder = "music"
-    if not exists(path_musicfldr): mkdir(path_musicfldr)
+    if not exists(path_musicfolder): mkdir(path_musicfolder)
     if not exists(path_musicfile):
         print("The path doesn't exist. Exiting...")
         time.sleep(2)
@@ -48,7 +48,7 @@ if __name__ == '__main__':
     with open("music.txt") as file:
         for line in file:
             stripped_line = line.rstrip('\n')
-            if 'soundcloud.com' in linestrip:
+            if 'soundcloud.com' in stripped_line:
                 get_music(stripped_line, api_key, path_musicfolder)
             else:
                 print("Skipping a line: Line doesn't contain a SoundCloud URL.")

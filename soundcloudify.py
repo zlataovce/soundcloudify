@@ -7,40 +7,39 @@ import time
 apikey = SoundcloudAPI()
 
 
-def get_music(url, api, musicfldr):
+def get_music(url, api, music_folder):
     track = api.resolve(url)
 
     assert type(track) is Track
 
-    filename = f'./{musicfldr}/{track.artist} - {track.title}.mp3'
-    props = f'{track.artist} - {track.title}'
-    print("Identified the song: " + props)
+    filename = f'./{music_folder}/{track.artist} - {track.title}.mp3'
+    properties = f'{track.artist} - {track.title}'
+    print("Identified the song: " + properties)
 
     if exists(filename):
-        print("Skipping " + props + ": The file already exists.")
+        print("Skipping " + properties + ": The file already exists.")
         return
 
     with open(filename, 'wb+') as fp:
         try:
             track.write_mp3_to(fp)
-            print("Received " + props + "!")
+            print("Received " + properties + "!")
         except (TypeError, ValueError):
-            print("Failed to get " + props + ".")
+            print("Failed to get " + properties + ".")
 
 
 if __name__ == '__main__':
-    print("SoundCloudify build 1.0dev5")
+    print("SoundCloudify build dev1.1")
     print("---------------------------")
     try:
-        path_musicfile = argv[0]
+        path_musicfile = argv[1]
     except IndexError:
         path_musicfile = "music.txt"
     try:
-        path_musicfldr = argv[1]
+        path_musicfolder = argv[2]
     except IndexError:
-        path_musicfldr = "music"
-    if not exists(path_musicfldr):
-        mkdir(path_musicfldr)
+        path_musicfolder = "music"
+    if not exists(path_musicfldr): mkdir(path_musicfldr)
     if not exists(path_musicfile):
         print("The path doesn't exist. Exiting...")
         time.sleep(2)
@@ -48,9 +47,9 @@ if __name__ == '__main__':
 
     with open("music.txt") as file:
         for line in file:
-            linestrip = line.rstrip('\n')
+            stripped_line = line.rstrip('\n')
             if 'soundcloud.com' in linestrip:
-                get_music(linestrip, apikey, path_musicfldr)
+                get_music(stripped_line, api_key, path_musicfolder)
             else:
                 print("Skipping a line: Line doesn't contain a SoundCloud URL.")
 
